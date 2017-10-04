@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!--CDN de font awesome-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <style>
+        li.completed {
+            text-decoration: line-through;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="root">
+    <ul>
+        <li v-for="task in tasks" v-bind:class="{ completed: isCompleted(task) }" @dblclick="updateTask(task)">
+            <input type="text" v-if="task == editedTask">
+            <div v-else>
+                {{task.name}}
+                <i class="fa fa-pencil" aria-hidden="true" @click="updateTask(task)"></i>
+                <i class="fa fa-times" aria-hidden="true" @click="deleteTask(task)"></i>
+            </div>
+        </li>
+    </ul>
+    New task: <input type="text" id="newTask" v-model="newTask" @keydown.enter="addTask">
+    <button id="add" @click="addTask">Add</button>
+</div>
+
+
+<script src="https://unpkg.com/vue"></script>
+
+<script>
+
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            editedTask: null,
+            newTask: '',
+            editingTask: '',
+            tasks: [
+                {
+                    name: 'Comprar pa',
+                    completed: true
+                },
+                {
+                    name: 'Learn PHP',
+                    completed: false
+                },
+                {
+                    name: 'Comprar llet xd',
+                    completed: false
+                }
+            ]
+        },
+        methods: {
+            addTask() {
+                this.tasks.push({ name: this.newTask, completed: false})
+                this.newTask=''
+            },
+            isCompleted(task) {
+                return task.completed
+            },
+            deleteTask(task) {
+                this.tasks.splice(this.tasks.indexOf(task), 1)
+            },
+            updateTask(task) {
+                this.editedTask = task
+            }
+        }
+    })
+
+
+
+
+    // Funció anonima o clousure
+//    document.querySelector('#add').addEventListener('click', function(){
+//        let newTask = document.querySelector('#newTask').value
+//        vm.tasks.push(newTask)
+//    })
+
+</script>
+
+</body>
+</html>

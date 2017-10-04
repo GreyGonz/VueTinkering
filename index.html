@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<!--VISTA-->
+
+<div id="root">
+    <input type="text" id="message" v-model="message">
+    <p>The value of input is: {{ message }}</p>
+</div>
+
+
+
+
+<script src="https://unpkg.com/vue"></script>
+
+<script>
+    // MODEL
+//    let data = {
+//        message: 'hello world'
+//    }
+
+    //CONTROLADOR
+//    document.querySelector('#message').value = data.message
+
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            message: 'Hello World'
+        }
+    })
+
+</script>
+
+</body>
+</html>
