@@ -2,6 +2,32 @@
 
 https://vuejs.org
 
+## Watch i computed
+
+https://vuejs.org/v2/guide/computed.html
+
+watch actuara en quant el que definim dins cambie
+
+En el cas següent si la variable tasks cambia s'executara el console.log
+
+    watch: {
+        tasks() {
+            console.log('OK');
+        }
+    }
+
+## mounted
+
+tot el que declarem dins de mounted s'executara a l'inici del programa
+
+https://vuejs.org/v2/api/#mounted
+
+# JSON
+
+- parse: llegir un objecte
+
+- stringify: guardar un objecte
+
 ## Extensió vue per a chrome
 
 https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd/related?hl=es
