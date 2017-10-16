@@ -27,11 +27,11 @@
 
 <div id="root" v-cloak="">
     <ul>
-        <li v-for="task in filteredTasks" v-bind:class="{ completed: isCompleted(task) }" @dblclick="updateTask(task)">
-            <input type="text" v-if="task == editedTask">
+        <li v-for="task in filteredTasks" v-bind:class="{ completed: isCompleted(task) }" @dblclick="editTask(task)">
+            <input type="text" id="editingTask" v-model="editingTask" v-if="task == editedTask" @keydown.enter="updateTask(task)" @keydown.esc="discardUpdate(task)">
             <div v-else>
                 {{task.name}}
-                <i class="fa fa-pencil" aria-hidden="true" @click="updateTask(task)"></i>
+                <i class="fa fa-pencil" aria-hidden="true" @click="editTask(task)"></i>
                 <i class="fa fa-times" aria-hidden="true" @click="deleteTask(task)"></i>
             </div>
         </li>
@@ -74,6 +74,7 @@
 
     let vm = new Vue({
         el: '#root',
+        input: '#editingTask',
         data: {
             editedTask: null,
             newTask: '',
@@ -108,8 +109,18 @@
             deleteTask(task) {
                 this.tasks.splice(this.tasks.indexOf(task), 1)
             },
-            updateTask(task) {
+            editTask(task) {
                 this.editedTask = task
+                this.editingTask = task.name
+            },
+            updateTask(task){
+                task.name = this.editingTask
+                this.editedTask = null
+                this.editingTask = ''
+            },
+            discardUpdate(task){
+                this.editedTask = null
+                this.editingTask = ''
             }
         },
         mounted() {
